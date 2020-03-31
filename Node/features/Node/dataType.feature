@@ -4,7 +4,8 @@ Feature: Provide a single struct-type to hold multiple kinds of data the same wa
   I need to be able to interact with multiple types of data stored within the hierarchy
 
   Scenario Outline: match node data types
-    Given I create a node
+    Given I create a node tree
+    And I create a child node
     When I give the node a <type> to store
     Then I can retrieve the data from the node as a <type>
 
@@ -16,7 +17,8 @@ Feature: Provide a single struct-type to hold multiple kinds of data the same wa
       | "string" |
 
   Scenario Outline: fail to retrieve improper data type
-    Given I create a node
+    Given I create a node tree
+    And I create a child node
     When I give the node a <type> to store
     Then I can't retrieve the data from the node as a <otherType>
 

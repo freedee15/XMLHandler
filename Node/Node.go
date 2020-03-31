@@ -6,15 +6,27 @@ import (
 	"strings"
 )
 
-type Node struct {
-	Label    string
-	data     string
-	children []*Node
+type Parent interface {
+	AddChild(child *Node) error
 }
 
-func (n *Node) AddChild(child *Node) {
+type Node struct {
+	label    string
+	data     string
+	children []*Node
+	parent   Parent
+}
 
-	n.children = append(n.children, child)
+func (n *Node) AddChild(child *Node) error {
+
+	if n.parent == nil {
+		return fmt.Errorf("no parent")
+	}
+	if n != child.GetParent() {
+		child.SetParent(n)
+		n.children = append(n.children, child)
+	}
+	return nil
 
 }
 
@@ -26,7 +38,7 @@ func (n *Node) GetChildFromLabel(label string) (*Node, error) {
 
 	for _, c := range n.children {
 
-		if c.Label == label {
+		if c.label == label {
 			return c, nil
 		}
 
@@ -72,26 +84,71 @@ func (n *Node) GetDataAsInt() (int, error) {
 
 }
 
-func (n *Node) SetData(s string) {
+func (n *Node) GetLabel() string {
 
+	return n.label
+
+}
+
+func (n *Node) GetParent() Parent {
+
+	return n.parent
+
+}
+
+func (n *Node) SetData(s string) error {
+
+	if n.parent == nil {
+		return fmt.Errorf("no parent")
+	}
 	n.data = s
+	return nil
 
 }
 
-func (n *Node) SetDataFromBool(b bool) {
+func (n *Node) SetDataFromBool(b bool) error {
 
+	if n.parent == nil {
+		return fmt.Errorf("no parent")
+	}
 	n.data = strconv.FormatBool(b)
+	return nil
 
 }
 
-func (n *Node) SetDataFromFloat(f float64) {
+func (n *Node) SetDataFromFloat(f float64) error {
 
+	if n.parent == nil {
+		return fmt.Errorf("no parent")
+	}
 	n.data = strconv.FormatFloat(f, 'f', -1, 64)
+	return nil
 
 }
 
-func (n *Node) SetDataFromInt(i int) {
+func (n *Node) SetDataFromInt(i int) error {
 
+	if n.parent == nil {
+		return fmt.Errorf("no parent")
+	}
 	n.data = strconv.Itoa(i)
+	return nil
+
+}
+
+func (n *Node) SetLabel(s string) error {
+
+	if n.parent == nil {
+		return fmt.Errorf("no parent")
+	}
+	n.label = s
+	return nil
+
+}
+
+func (n *Node) SetParent(p Parent) {
+
+	n.parent = p
+	p.AddChild(n)
 
 }

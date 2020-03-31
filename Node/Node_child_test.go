@@ -13,14 +13,16 @@ func iCreateAChildNodeWithTheLabel(arg1 string) error {
 		return fmt.Errorf("this step does not know how to fail")
 	}
 
-	node.AddChild(&Node{Label: arg1})
+	childNode := &Node{}
+	nodeTree.AddChild(childNode)
+	childNode.label = arg1
 	return nil
 
 }
 
 func iGiveChildNodeAValueOf(arg1, arg2 string) error {
 
-	c, e := node.GetChildFromLabel(arg1)
+	c, e := nodeTree.GetChildFromLabel(arg1)
 
 	if shouldFail == true {
 
@@ -45,7 +47,7 @@ func iGiveChildNodeAValueOf(arg1, arg2 string) error {
 
 func iRetrieveDataFromChildNode(arg1 string) error {
 
-	c, e := node.GetChildFromLabel(arg1)
+	c, e := nodeTree.GetChildFromLabel(arg1)
 
 	if shouldFail == true {
 

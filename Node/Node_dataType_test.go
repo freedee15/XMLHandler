@@ -11,23 +11,23 @@ func iGiveTheNodeAToStore(arg1 string) error {
 		return fmt.Errorf("this step does not know how to fail")
 	}
 
-	if node == nil {
+	if childNode == nil {
 		return fmt.Errorf("no node to modify")
 	}
 
 	switch arg1 {
 
 	case "bool":
-		node.SetDataFromBool(true)
+		childNode.SetDataFromBool(true)
 
 	case "float":
-		node.SetDataFromFloat(0.1)
+		childNode.SetDataFromFloat(0.1)
 
 	case "int":
-		node.SetDataFromInt(1)
+		childNode.SetDataFromInt(1)
 
 	case "string":
-		node.SetData("s")
+		childNode.SetData("s")
 
 	default:
 		return fmt.Errorf("invalid type specified: %s", arg1)
@@ -45,14 +45,14 @@ func iCanRetrieveTheDataFromTheNodeAsA(arg1 string) error {
 		return fmt.Errorf("this step does not know how to fail")
 	}
 
-	if node == nil {
+	if childNode == nil {
 		return fmt.Errorf("no node to modify")
 	}
 
 	switch arg1 {
 
 	case "bool":
-		b, e := node.GetDataAsBool()
+		b, e := childNode.GetDataAsBool()
 		if e != nil {
 			return e
 		}
@@ -61,7 +61,7 @@ func iCanRetrieveTheDataFromTheNodeAsA(arg1 string) error {
 		}
 
 	case "float":
-		f, e := node.GetDataAsFloat()
+		f, e := childNode.GetDataAsFloat()
 		if e != nil {
 			return e
 		}
@@ -70,7 +70,7 @@ func iCanRetrieveTheDataFromTheNodeAsA(arg1 string) error {
 		}
 
 	case "int":
-		i, e := node.GetDataAsInt()
+		i, e := childNode.GetDataAsInt()
 		if e != nil {
 			return e
 		}
@@ -79,7 +79,7 @@ func iCanRetrieveTheDataFromTheNodeAsA(arg1 string) error {
 		}
 
 	case "string":
-		if s := node.GetData(); s != "s" {
+		if s := childNode.GetData(); s != "s" {
 			return fmt.Errorf("expected %s, got %s", "s", s)
 		}
 
@@ -99,24 +99,24 @@ func iCantRetrieveTheDataFromTheNodeAsA(arg1 string) error {
 		return fmt.Errorf("this step does not know how to fail")
 	}
 
-	if node == nil {
+	if childNode == nil {
 		return fmt.Errorf("no node to modify")
 	}
 
 	switch arg1 {
 
 	case "bool":
-		if _, e := node.GetDataAsBool(); e == nil {
+		if _, e := childNode.GetDataAsBool(); e == nil {
 			return fmt.Errorf("failed to throw error")
 		}
 
 	case "float":
-		if _, e := node.GetDataAsFloat(); e == nil {
+		if _, e := childNode.GetDataAsFloat(); e == nil {
 			return fmt.Errorf("failed to throw error")
 		}
 
 	case "int":
-		if _, e := node.GetDataAsInt(); e == nil {
+		if _, e := childNode.GetDataAsInt(); e == nil {
 			return fmt.Errorf("failed to throw error")
 		}
 
