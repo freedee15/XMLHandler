@@ -4,8 +4,6 @@ import (
 	"fmt"
 )
 
-var retrieved string
-
 func iCreateAChildNodeWithTheLabel(arg1 string) error {
 
 	if shouldFail == true {
@@ -64,7 +62,7 @@ func iRetrieveDataFromChildNode(arg1 string) error {
 	if e != nil {
 		return e
 	}
-	retrieved = c.GetData()
+	retrieved = c.data
 
 	return nil
 
