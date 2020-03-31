@@ -3,7 +3,8 @@ package Node
 import "strconv"
 
 type Node struct {
-	data string
+	Label string
+	data  string
 }
 
 func (n *Node) SetDataFromBool(b bool) {

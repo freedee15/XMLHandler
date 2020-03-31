@@ -1,29 +1,8 @@
 package Node
 
 import (
-	"flag"
 	"fmt"
-	"github.com/cucumber/godog"
-	"github.com/cucumber/godog/colors"
-	"os"
-	"testing"
 )
-
-var opt = godog.Options{Strict: true, Output: colors.Colored(os.Stdout)}
-
-func init() {
-	godog.BindFlags("godog.", flag.CommandLine, &opt)
-}
-
-func TestNode(t *testing.T) {
-	opt.Paths = []string{"features/dataType.feature"}
-	result := godog.RunWithOptions("Node", func(suite *godog.Suite) { FeatureContext(suite) }, opt)
-	if result != 0 {
-		t.Errorf("godog exited with code %d", result)
-	}
-}
-
-var node *Node = nil
 
 func iCreateANode() error {
 
@@ -139,18 +118,5 @@ func iCantRetrieveTheDataFromTheNodeAsA(arg1 string) error {
 	}
 
 	return nil
-
-}
-
-func FeatureContext(s *godog.Suite) {
-
-	s.BeforeScenario(func(i interface{}) {
-		node = nil
-	})
-
-	s.Step(`^I create a node$`, iCreateANode)
-	s.Step(`^I give the node a "([^"]*)" to store$`, iGiveTheNodeAToStore)
-	s.Step(`^I can retrieve the data from the node as a "([^"]*)"$`, iCanRetrieveTheDataFromTheNodeAsA)
-	s.Step(`^I can\'t retrieve the data from the node as a "([^"]*)"$`, iCantRetrieveTheDataFromTheNodeAsA)
 
 }
