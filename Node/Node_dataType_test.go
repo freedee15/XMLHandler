@@ -1,9 +1,27 @@
 package Node
 
 import (
+	"flag"
 	"fmt"
 	"github.com/cucumber/godog"
+	"github.com/cucumber/godog/colors"
+	"os"
+	"testing"
 )
+
+var opt = godog.Options{Strict: true, Output: colors.Colored(os.Stdout)}
+
+func init() {
+	godog.BindFlags("godog.", flag.CommandLine, &opt)
+}
+
+func TestNode(t *testing.T) {
+	opt.Paths = []string{"features/dataType.feature"}
+	result := godog.RunWithOptions("Node", func(suite *godog.Suite) { FeatureContext(suite) }, opt)
+	if result != 0 {
+		t.Errorf("godog exited with code %d", result)
+	}
+}
 
 var node *Node = nil
 
