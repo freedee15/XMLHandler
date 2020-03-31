@@ -4,14 +4,12 @@ import (
 	"fmt"
 )
 
-func iCreateANode() error {
-
-	node = &Node{}
-	return nil
-
-}
-
 func iGiveTheNodeAToStore(arg1 string) error {
+
+	if shouldFail == true {
+		shouldFail = false
+		return fmt.Errorf("this step does not know how to fail")
+	}
 
 	if node == nil {
 		return fmt.Errorf("no node to modify")
@@ -41,6 +39,11 @@ func iGiveTheNodeAToStore(arg1 string) error {
 }
 
 func iCanRetrieveTheDataFromTheNodeAsA(arg1 string) error {
+
+	if shouldFail == true {
+		shouldFail = false
+		return fmt.Errorf("this step does not know how to fail")
+	}
 
 	if node == nil {
 		return fmt.Errorf("no node to modify")
@@ -90,6 +93,11 @@ func iCanRetrieveTheDataFromTheNodeAsA(arg1 string) error {
 }
 
 func iCantRetrieveTheDataFromTheNodeAsA(arg1 string) error {
+
+	if shouldFail == true {
+		shouldFail = false
+		return fmt.Errorf("this step does not know how to fail")
+	}
 
 	if node == nil {
 		return fmt.Errorf("no node to modify")

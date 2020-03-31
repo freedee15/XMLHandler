@@ -1,33 +1,44 @@
 package Node
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
 
 type Node struct {
-	Label string
-	data  string
+	Label    string
+	data     string
+	children []*Node
 }
 
-func (n *Node) SetDataFromBool(b bool) {
+func (n *Node) AddChild(child *Node) {
 
-	n.data = strconv.FormatBool(b)
-
-}
-
-func (n *Node) SetDataFromFloat(f float64) {
-
-	n.data = strconv.FormatFloat(f, 'f', -1, 64)
+	n.children = append(n.children, child)
 
 }
 
-func (n *Node) SetDataFromInt(i int) {
+func (n *Node) GetChildFromLabel(label string) (*Node, error) {
 
-	n.data = strconv.Itoa(i)
+	if strings.Replace(label, " ", "", -1) == "" {
+		return nil, fmt.Errorf("empty label")
+	}
+
+	for _, c := range n.children {
+
+		if c.Label == label {
+			return c, nil
+		}
+
+	}
+
+	return nil, fmt.Errorf("no child with label \"%s\"", label)
 
 }
 
-func (n *Node) SetData(s string) {
+func (n *Node) GetData() string {
 
-	n.data = s
+	return n.data
 
 }
 
@@ -61,8 +72,26 @@ func (n *Node) GetDataAsInt() (int, error) {
 
 }
 
-func (n *Node) GetData() string {
+func (n *Node) SetData(s string) {
 
-	return n.data
+	n.data = s
+
+}
+
+func (n *Node) SetDataFromBool(b bool) {
+
+	n.data = strconv.FormatBool(b)
+
+}
+
+func (n *Node) SetDataFromFloat(f float64) {
+
+	n.data = strconv.FormatFloat(f, 'f', -1, 64)
+
+}
+
+func (n *Node) SetDataFromInt(i int) {
+
+	n.data = strconv.Itoa(i)
 
 }
