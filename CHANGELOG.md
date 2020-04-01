@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [0.1.3] - 2020/04/02
+
+### Added:
+- Reference documentation (now available [here!](https://freedee15.github.io/XMLHandler))
+- Cleaned up some stuff
+
 ## [0.1.2] - 2020/04/01
 
 ### Added:

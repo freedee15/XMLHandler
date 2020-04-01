@@ -6,8 +6,8 @@ import (
 )
 
 type Tree struct {
-	Label    string
 	children []*Node
+	Label    string
 }
 
 func (t *Tree) AddChild(child *Node) error {
