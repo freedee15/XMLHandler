@@ -6,14 +6,10 @@ import (
 	"strings"
 )
 
-type Parent interface {
-	AddChild(child *Node) error
-}
-
 type Node struct {
-	label    string
-	data     string
 	children []*Node
+	data     string
+	label    string
 	parent   Parent
 }
 

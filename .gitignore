@@ -1,2 +1,5 @@
 .idea
 *Dockerfile
+_site
+Gemfile
+Gemfile.lock
