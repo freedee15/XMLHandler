@@ -1,0 +1,8 @@
+<?xml version="2.0" encoding="UTF-8" ?>
+<XMLTree>
+    <NewNode>foo</NewNode>
+    <OtherNode>
+        bar
+        <OtherNode1> baz </OtherNode1>
+    </OtherNode>
+</XMLTree>

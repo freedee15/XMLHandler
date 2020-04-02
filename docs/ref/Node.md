@@ -1,21 +1,21 @@
-## Reference: XMLHandler/Node.**Node** <span style = "color:#445588">struct</span>
+## Reference: XMLHandler.**Node** <span style = "color:#445588">struct</span>
 
 #### Fields:
-  - [**children** <span style="color:#445588">[]*Node</span>](#field_children)
+  - [**children** <span style="color:#445588">[]*XMLHandler.Node</span>](#field_children)
   - [**data** <span style="color:#445588">string</span>](#field_data)
   - [**label** <span style="color:#445588">string</span>](#field_label)
-  - [**parent** <span style="color:#445588">Parent</span>](#field_parent)
+  - [**parent** <span style="color:#445588">XMLHandler.Parent</span>](#field_parent)
 
 #### Methods:
-- [**AddChild**(child <span style="color:#445588">*Node</span>) <span style="color:#445588">error</span>](#method_AddChild)
-- [**GetChildFromLabel**(label <span style="color:#445588">string</span>) (<span style="color:#445588">*Node</span>, <span style="color:#445588">error</span>)](#method_GetChildFromLabel)
-- [**GetChildren**() (<span style="color:#445588">[]*Node</span>, <span style="color:#445588">error</span>)](#method_GetChildren)
+- [**AddChild**(child <span style="color:#445588">*XMLHandler.Node</span>) <span style="color:#445588">error</span>](#method_AddChild)
+- [**GetChildFromLabel**(label <span style="color:#445588">string</span>) (<span style="color:#445588">*XMLHandler.Node</span>, <span style="color:#445588">error</span>)](#method_GetChildFromLabel)
+- [**GetChildren**() (<span style="color:#445588">[]*XMLHandler.Node</span>, <span style="color:#445588">error</span>)](#method_GetChildren)
 - [**GetData**() (<span style="color:#445588">string</span>, <span style="color:#445588">error</span>)](#method_GetData)
 - [**GetDataAsBool**() (<span style="color:#445588">bool</span>, <span style="color:#445588">error</span>)](#method_GetDataAsBool)
 - [**GetDataAsFloat**() (<span style="color:#445588">float64</span>, <span style="color:#445588">error</span>)](#method_GetDataAsFloat)
 - [**GetDataAsInt**() (<span style="color:#445588">int</span>, <span style="color:#445588">error</span>)](#method_GetDataAsInt)
 - [**GetLabel**() (<span style="color:#445588">string</span>, <span style="color:#445588">error</span>)](#method_GetLabel)
-- [**GetParent**() (<span style="color:#445588">Parent</span>, <span style="color:#445588">error</span>)](#method_GetParent)
+- [**GetParent**() (<span style="color:#445588">XMLHandler.Parent</span>, <span style="color:#445588">error</span>)](#method_GetParent)
 - [**SetData**(s <span style="color:#445588">string</span>) <span style="color:#445588">error</span>](#method_SetData)
 - [**SetDataFromBool**(b <span style="color:#445588">bool</span>) <span style="color:#445588">error</span>](#method_SetDataFromBool)
 - [**SetDataFromFloat**(f <span style="color:#445588">float64</span>) <span style="color:#445588">error</span>](#method_SetDataFromFloat)
@@ -24,10 +24,10 @@
    
 ```go
 type Node struct {
-	children []*Node
+	children []*XMLHandler.Node
 	data     string
 	label    string
-	parent   Parent
+	parent   XMLHandler.Parent
 }
 ```
      
@@ -35,7 +35,7 @@ A struct object to hold data like an XML node would. Access to the fields of thi
 
 ### Fields
 
-<a name="field_children"></a><span style="font-size:1.25em">**children** <span style="color:#445588">[]*[<span style='font-weight:400'>Node</span>](/XMLHandler/docs/ref/Node/Node)</span>
+<a name="field_children"></a><span style="font-size:1.25em">**children** <span style="color:#445588">[]*[<span style='font-weight:400'>XMLHandler.Node</span>](/XMLHandler/docs/ref)</span>
 ><span style="font-style:normal">Stores all child nodes.</span>
 
 ---
@@ -56,16 +56,16 @@ A struct object to hold data like an XML node would. Access to the fields of thi
 
 ---
 
-<a name="field_parent"></a><span style="font-size:1.25em">**parent** [<span style='font-weight:400'>Parent</span>](/XMLHandler/docs/ref/Node/Parent)
-><span style="font-style:normal">Holds the pointer to the objects parent in the hierarchy. The nodes other properties cannot be accessed until it has a parent. You can set a parent with either the builtin `SetParent(p Parent)` function or by passing the node object to a Parent object's `AddChild(child *Node)` function. Both will ensure that the Node object has its `parent` set properly and that the node gets added to the Parent's `children` array.</span>
+<a name="field_parent"></a><span style="font-size:1.25em">**parent** [<span style='font-weight:400'>XMLHandler.Parent</span>](/XMLHandler/docs/ref/Parent)
+><span style="font-style:normal">Holds the pointer to the objects parent in the hierarchy. The nodes other properties cannot be accessed until it has a parent. You can set a parent by passing the node object to a Parent object's `AddChild(child *XMLHandler.Node)` function. Both will ensure that the Node object has its `parent` set properly and that the node gets added to the Parent's `children` array.</span>
 
 ---
 ### Methods
 
-<a name="method_AddChild"></a><span style="font-size:1.25em">**AddChild**(child <span style="color:#445588">*[<span style="font-weight:400">Node</span>](/XMLHandler/docs/ref/Node/Node)</span>) <span style="color:#445588">error</span>
+<a name="method_AddChild"></a><span style="font-size:1.25em">**AddChild**(child <span style="color:#445588">*[<span style="font-weight:400">XMLHandler.Node</span>](/XMLHandler/docs/ref/Node)</span>) <span style="color:#445588">error</span>
 
 ```go
-func (n *Node) AddChild(child *Node) error {
+func (n *XMLHandler.Node) AddChild(child *XMLHandler.Node) error {
 
 	if n.parent == nil {
 		return fmt.Errorf("no parent")
@@ -94,10 +94,10 @@ func (n *Node) AddChild(child *Node) error {
 
 ---
 
-<a name="method_GetChildFromLabel"></a><span style="font-size:1.25em">**GetChildFromLabel**(label <span style="color:#445588">string</span>) (<span style="color:#445588">*[<span style="font-weight:400">Node</span>](/XMLHandler/docs/ref/Node/Node)</span>, <span style="color:#445588">error</span>)
+<a name="method_GetChildFromLabel"></a><span style="font-size:1.25em">**GetChildFromLabel**(label <span style="color:#445588">string</span>) (<span style="color:#445588">*[<span style="font-weight:400">XMLHandler.Node</span>](/XMLHandler/docs/ref/Node)</span>, <span style="color:#445588">error</span>)
 
 ```go
-func (n *Node) GetChildFromLabel(label string) (*Node, error) {
+func (n *XMLHandler.Node) GetChildFromLabel(label string) (*XMLHandler.Node, error) {
 
 	if strings.Replace(label, " ", "", -1) == "" {
 		return nil, fmt.Errorf("empty label")
@@ -120,10 +120,10 @@ func (n *Node) GetChildFromLabel(label string) (*Node, error) {
 
 ---
 
-<a name="method_GetChildren"></a><span style="font-size:1.25em">**GetChildren**() (<span style="color:#445588">[]*[<span style="font-weight:400">Node</span>](/XMLHandler/docs/ref/Node/Node)</span>, <span style="color:#445588">error</span>)</span>
+<a name="method_GetChildren"></a><span style="font-size:1.25em">**GetChildren**() (<span style="color:#445588">[]*[<span style="font-weight:400">XMLHandler.Node</span>](/XMLHandler/docs/ref/Node)</span>, <span style="color:#445588">error</span>)</span>
 
 ```go
-func (n *Node) GetChildren() ([]*Node, error) {
+func (n *XMLHandler.Node) GetChildren() ([]*XMLHandler.Node, error) {
 
 	if n.parent == nil {
 		return nil, fmt.Errorf("no parent")
@@ -140,7 +140,7 @@ func (n *Node) GetChildren() ([]*Node, error) {
 <a name="method_GetData"></a><span style="font-size:1.25em">**GetData**() (<span style="color:#445588">string</span>, <span style="color:#445588">error</span>)</span>
 
 ```go
-func (n *Node) GetData() (string, error) {
+func (n *XMLHandler.Node) GetData() (string, error) {
 
 	if n.parent == nil {
 		return "", fmt.Errorf("no parent")
@@ -157,7 +157,7 @@ func (n *Node) GetData() (string, error) {
 <a name="method_GetDataAsBool"></a><span style="font-size:1.25em">**GetDataAsBool**() (<span style="color:#445588">bool</span>, <span style="color:#445588">error</span>)</span>
 
 ```go
-func (n *Node) GetDataAsBool() (bool, error) {
+func (n *XMLHandler.Node) GetDataAsBool() (bool, error) {
 
 	if n.parent == nil {
 		return false, fmt.Errorf("no parent")
@@ -199,7 +199,7 @@ func (n *Node) GetDataAsFloat() (float64, error) {
 <a name="method_GetDataAsInt"></a><span style="font-size:1.25em">**GetDataAsInt**() (<span style="color:#445588">int</span>, <span style="color:#445588">error</span>)</span>
 
 ```go
-func (n *Node) GetDataAsInt() (int, error) {
+func (n *XMLHandler.Node) GetDataAsInt() (int, error) {
 
 	if n.parent == nil {
 		return 0, fmt.Errorf("no parent")
@@ -220,7 +220,7 @@ func (n *Node) GetDataAsInt() (int, error) {
 <a name="method_GetLabel"></a><span style="font-size:1.25em">**GetLabel**() (<span style="color:#445588">string</span>, <span style="color:#445588">error</span>)</span>
 
 ```go
-func (n *Node) GetLabel() (string, error) {
+func (n *XMLHandler.Node) GetLabel() (string, error) {
 
 	if n.parent == nil {
 		return "", fmt.Errorf("no parent")
@@ -234,10 +234,10 @@ func (n *Node) GetLabel() (string, error) {
 
 ---
 
-<a name="method_GetParent"></a><span style="font-size:1.25em">**GetParent**() ([<span style="font-weight:400">Parent</span>](/XMLHandler/docs/ref/Node/Parent), <span style="color:#445588">error</span>)</span>
+<a name="method_GetParent"></a><span style="font-size:1.25em">**GetParent**() ([<span style="font-weight:400">XMLHandler.Parent</span>](/XMLHandler/docs/ref/Parent), <span style="color:#445588">error</span>)</span>
 
 ```go
-func (n *Node) GetParent() (Parent, error) {
+func (n *XMLHandler.Node) GetParent() (XMLHandler.Parent, error) {
 
 	if n.parent == nil {
 		return nil, fmt.Errorf("no parent")
@@ -253,7 +253,7 @@ func (n *Node) GetParent() (Parent, error) {
 
 <a name="method_SetData"></a><span style="font-size:1.25em">**SetData**(s <span style="color:#445588">string</span>) <span style="color:#445588">error</span>
 ```go
-func (n *Node) SetData(s string) error {
+func (n *XMLHandler.Node) SetData(s string) error {
 
 	if n.parent == nil {
 		return fmt.Errorf("no parent")
@@ -270,7 +270,7 @@ func (n *Node) SetData(s string) error {
 
 <a name="method_SetDataFromBool"></a><span style="font-size:1.25em">**SetDataFromBool**(b <span style="color:#445588">bool</span>) <span style="color:#445588">error</span>
 ```go
-func (n *Node) SetDataFromBool(b bool) error {
+func (n *XMLHandler.Node) SetDataFromBool(b bool) error {
 
 	if n.parent == nil {
 		return fmt.Errorf("no parent")
@@ -287,7 +287,7 @@ func (n *Node) SetDataFromBool(b bool) error {
 
 <a name="method_SetDataFromFloat"></a><span style="font-size:1.25em">**SetDataFromFloat**(f <span style="color:#445588">float64</span>) <span style="color:#445588">error</span>
 ```go
-func (n *Node) SetDataFromFloat(f float64) error {
+func (n *XMLHandler.Node) SetDataFromFloat(f float64) error {
 
 	if n.parent == nil {
 		return fmt.Errorf("no parent")
@@ -304,7 +304,7 @@ func (n *Node) SetDataFromFloat(f float64) error {
 
 <a name="method_SetDataFromInt"></a><span style="font-size:1.25em">**SetDataFromInt**(i <span style="color:#445588">int</span>) <span style="color:#445588">error</span>
 ```go
-func (n *Node) SetDataFromInt(i int) error {
+func (n *XMLHandler.Node) SetDataFromInt(i int) error {
 
 	if n.parent == nil {
 		return fmt.Errorf("no parent")
@@ -321,7 +321,7 @@ func (n *Node) SetDataFromInt(i int) error {
 
 <a name="method_SetLabel"></a><span style="font-size:1.25em">**SetLabel**(s <span style="color:#445588">string</span>) <span style="color:#445588">error</span></span>
 ```go
-func (n *Node) SetLabel(s string) error {
+func (n *XMLHandler.Node) SetLabel(s string) error {
 
 	if n.parent == nil {
 		return fmt.Errorf("no parent")

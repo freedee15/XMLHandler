@@ -5,7 +5,7 @@ Feature: Access child node data easily
 
   Scenario: access child node by it's label
     Given I create a node tree
-    And I create a child node with the label "NewNode"
+    And I create a child node of node tree labelled "NewNode"
     And I give child node "NewNode" a value of "Hello, World!"
     When I retrieve data from child node "NewNode"
     Then the retrieved node data should be "Hello, World!"
@@ -18,8 +18,8 @@ Feature: Access child node data easily
 
   Scenario: Access all children
     Given I create a node tree
-    And I create a child node with the label "NewNode"
-    And I create a child node with the label "OtherNode"
+    And I create a child node of node tree labelled "NewNode"
+    And I create a child node of node tree labelled "OtherNode"
     And I create a child node in "NewNode" with the label "NewNode1"
     And I create a child node in "NewNode" with the label "NewNode2"
     And I create a child node in "NewNode" with the label "NewNode3"
