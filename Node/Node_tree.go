@@ -40,3 +40,9 @@ func (t *Tree) GetChildFromLabel(label string) (*Node, error) {
 	return nil, fmt.Errorf("no child with label \"%s\"", label)
 
 }
+
+func (t *Tree) GetChildren() []*Node {
+
+	return t.children
+
+}

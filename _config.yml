@@ -1,6 +1,5 @@
 theme: jekyll-theme-dinky
-title: XML
-       Handler
+title: XMLHandler
 github:
-       home: https://freedee15.github.io/XMLHandler
-       docs: https://freedee15.github.io/XMLHandler/docs
+       home: /XMLHandler
+       docs: /XMLHandler/docs

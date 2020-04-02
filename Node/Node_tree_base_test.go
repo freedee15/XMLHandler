@@ -6,14 +6,34 @@ import (
 
 func iAddAChildNodeLabelledToTheNodeTree(arg1 string) error {
 
+	if nodeTree == nil {
+		return fmt.Errorf("no node tree")
+	}
+
+	if shouldFail == true {
+		shouldFail = false
+		return fmt.Errorf("this step does not know how to fail")
+	}
+
 	newNode := Node{}
-	nodeTree.AddChild(&newNode)
+	if e := nodeTree.AddChild(&newNode); e != nil {
+		return e
+	}
 	newNode.label = arg1
 	return nil
 
 }
 
 func nodeShouldHaveTheParent(arg1, arg2 string) error {
+
+	if nodeTree == nil {
+		return fmt.Errorf("no node tree")
+	}
+
+	if shouldFail == true {
+		shouldFail = false
+		return fmt.Errorf("this step does not know how to fail")
+	}
 
 	c, e := nodeTree.GetChildFromLabel(arg1)
 	if e != nil {
