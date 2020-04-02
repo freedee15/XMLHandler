@@ -2,9 +2,9 @@
 
 ![Go](https://github.com/freedee15/XMLHandler/workflows/Go/badge.svg)
 
-Version 0.1.1
+Version 0.1.2
 
-`go get github.com/freedee15/XMLHandler@v0.1.1`
+`go get github.com/freedee15/XMLHandler@v0.1.2`
 
 ---
 
@@ -17,4 +17,4 @@ _A Go package for interaction with XML files._
 
 ---
 
-API documentation can be found [here.](https://freedee15.github.io/XMLHandler/docs/api)
+Documentation can be found [here.](docs/ref)

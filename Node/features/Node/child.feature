@@ -12,6 +12,16 @@ Feature: Access child node data easily
 
   Scenario: fail to get non-existent child node
     Given I create a node tree
-    And I should fail the following step
+    And the next step should fail
     When I retrieve data from child node "NewNode"
-    Then the retrieved node data should be ""
+    Then I should get the error 'no child with label "NewNode"'
+
+  Scenario: Access all children
+    Given I create a node tree
+    And I create a child node with the label "NewNode"
+    And I create a child node with the label "OtherNode"
+    And I create a child node in "NewNode" with the label "NewNode1"
+    And I create a child node in "NewNode" with the label "NewNode2"
+    And I create a child node in "NewNode" with the label "NewNode3"
+    Then the children array of the node tree should have 2 members
+    And the children array of node "NewNode" should have 3 members

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [0.1.2] - 2020/04/01
+
+### Added:
+
+- `GetChildren` method in XMLHandler/Node.Node and XMLHandler/Node.Tree
+- `no parent` error in getters in XMLHandler/Node.Node
+- Removed `SetParent` method from XMLHandler/Node.Node
+- Added and updated tests
+
 ## [0.1.1] - 2020/04/01
 
 ### Added:

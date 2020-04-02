@@ -7,7 +7,8 @@ Feature: Provide a single struct-type to hold multiple kinds of data the same wa
     Given I create a node tree
     And I create a child node
     When I give the node a <type> to store
-    Then I can retrieve the data from the node as a <type>
+    And I retrieve the child node data as a <type>
+    Then I should get no error
 
     Examples:
       | type     |
@@ -19,11 +20,13 @@ Feature: Provide a single struct-type to hold multiple kinds of data the same wa
   Scenario Outline: fail to retrieve improper data type
     Given I create a node tree
     And I create a child node
-    When I give the node a <type> to store
-    Then I can't retrieve the data from the node as a <otherType>
+    And I give the node a <type> to store
+    And the next step should fail
+    When I retrieve the child node data as a <otherType>
+    Then I should get the error 'strconv.<error>: parsing "<parse>": invalid syntax'
 
     Examples:
-      | type     | otherType |
-      | "bool"   | "int"     |
-      | "float"  | "int"     |
-      | "string" | "bool"    |
+      | type     | error     | parse | otherType |
+      | "bool"   | Atoi      | true  | "int"     |
+      | "float"  | Atoi      | 0.1   | "int"     |
+      | "string" | ParseBool | s     | "bool"    |
