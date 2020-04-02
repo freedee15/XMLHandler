@@ -1,4 +1,4 @@
-package Node
+package XMLHandler
 
 import (
 	"fmt"
