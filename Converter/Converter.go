@@ -3,6 +3,7 @@ package Converter
 import (
 	"fmt"
 	"github.com/freedee15/XMLHandler/Node"
+	"io/ioutil"
 	"strings"
 )
 
@@ -167,5 +168,23 @@ func ConvertTreeToXML(t *Node.Tree) (string, error) {
 	returnString += fmt.Sprintf("</%s>", t.Label)
 
 	return returnString, nil
+
+}
+
+func ExportTree(t *Node.Tree, path string) error {
+
+	if t == nil {
+		return fmt.Errorf("nil tree")
+	}
+
+	o, e := ConvertTreeToXML(t)
+	if e != nil {
+		return e
+	}
+	b := []byte(fmt.Sprintf("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n%s", o))
+	if e = ioutil.WriteFile(path, b, 0644); e != nil {
+		return e
+	}
+	return nil
 
 }

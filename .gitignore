@@ -1,6 +1,5 @@
 .idea
 *Dockerfile
 _site
-Gemfile
-Gemfile.lock
 XMLHandler
+/.sass-cache/
