@@ -126,6 +126,7 @@ func FeatureContext(s *godog.Suite) {
 	s.Step(`^data from node "([^"]*)" should be "([^"]*)"$`, dataFromNodeShouldBe)
 	s.Step(`^I get the node\'s label$`, iGetTheNodesLabel)
 	s.Step(`^I get the children array of the node$`, iGetTheChildrenArrayOfTheNode)
+	s.Step(`^I get the parent of the node$`, iGetTheParentOfTheNode)
 
 	// Tree/noParent
 	s.Step(`^I add a child node labelled "([^"]*)" to the node tree$`, iAddAChildNodeLabelledToTheNodeTree)

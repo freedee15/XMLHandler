@@ -252,3 +252,30 @@ func iGetTheChildrenArrayOfTheNode() error {
 	return nil
 
 }
+
+func iGetTheParentOfTheNode() error {
+
+	if node == nil {
+		return fmt.Errorf("no node")
+	}
+
+	if shouldFail == true {
+
+		shouldFail = false
+		if _, e := node.GetParent(); e == nil {
+			return fmt.Errorf("failed to throw error")
+		} else {
+			getError = e
+		}
+
+		return nil
+
+	}
+
+	if _, e := node.GetParent(); e != nil {
+		return e
+	}
+
+	return nil
+
+}

@@ -2,9 +2,9 @@
 
 ![Go](https://github.com/freedee15/XMLHandler/workflows/Go/badge.svg)
 
-Version 0.1.3
+Version 0.1.4
 
-`go get github.com/freedee15/XMLHandler@v0.1.3`
+`go get github.com/freedee15/XMLHandler@v0.1.4`
 
 ---
 
