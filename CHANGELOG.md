@@ -1,5 +1,11 @@
 # CHANGELOG
 
+
+## [0.2.0]
+
+### Added:
+- Added package Converter
+
 ## [0.1.4] - 2020/04/03
 
 ### Added:
