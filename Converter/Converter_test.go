@@ -140,14 +140,14 @@ func FeatureContext(s *godog.Suite) {
 	s.Step(`^I select child node "([^"]*)" of selected node$`, iSelectChildNodeOfSelectedNode)
 	s.Step(`^I set the selected node\'s data to "([^"]*)"$`, iSetTheSelectedNodesDataTo)
 
-	//convertToXML
+	//convert
 	s.Step(`^I create a node tree$`, iCreateANodeTree)
 	s.Step(`^I create a child node of node "([^"]*)" labelled "([^"]*)"$`, iCreateAChildNodeOfNodeLabelled)
 	s.Step(`^I convert the selected node to XML$`, iConvertTheSelectedNodeToXML)
 	s.Step(`^I convert the node tree to XML$`, iConvertTheNodeTreeToXML)
 	s.Step(`^the output should be:$`, theOutputShouldBe)
 
-	//export
+	//io
 	s.Step(`^I create a child node of selected node labelled "([^"]*)"$`, iCreateAChildNodeOfSelectedNodeLabelled)
 	s.Step(`^I export the node tree to "([^"]*)"$`, iExportTheNodeTreeTo)
 	s.Step(`^the file "([^"]*)" should read:$`, theFileShouldRead)
