@@ -36,8 +36,14 @@ Feature: All nodes must have a parent node/node tree
     When I get the node's label
     Then I should get the error "no parent"
 
-  Scenario: try to get label to check error
+  Scenario: try to get children array to check error
     Given I create a node
     And the next step should fail
     When I get the children array of the node
+    Then I should get the error "no parent"
+
+  Scenario: try to get parent to check error
+    Given I create a node
+    And the next step should fail
+    When I get the parent of the node
     Then I should get the error "no parent"

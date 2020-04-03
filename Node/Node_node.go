@@ -29,7 +29,7 @@ func (n *Node) AddChild(child *Node) error {
 
 	}
 
-	if n != child.GetParent() || found == false {
+	if n != child.parent || found == false {
 		child.parent = n
 		n.children = append(n.children, child)
 	}
@@ -121,9 +121,12 @@ func (n *Node) GetLabel() (string, error) {
 
 }
 
-func (n *Node) GetParent() Parent {
+func (n *Node) GetParent() (Parent, error) {
 
-	return n.parent
+	if n.parent == nil {
+		return nil, fmt.Errorf("no parent")
+	}
+	return n.parent, nil
 
 }
 

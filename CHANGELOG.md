@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [0.1.4] - 2020/04/03
+
+### Added:
+- Added `error` parameter to Node/Node.GetParent method
+- Updated tests
+- Updated docs
+
 ## [0.1.3] - 2020/04/02
 
 ### Added:

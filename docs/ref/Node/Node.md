@@ -15,7 +15,7 @@
 - [**GetDataAsFloat**() (<span style="color:#445588">float64</span>, <span style="color:#445588">error</span>)](#method_GetDataAsFloat)
 - [**GetDataAsInt**() (<span style="color:#445588">int</span>, <span style="color:#445588">error</span>)](#method_GetDataAsInt)
 - [**GetLabel**() (<span style="color:#445588">string</span>, <span style="color:#445588">error</span>)](#method_GetLabel)
-- [**GetParent**() <span style="color:#445588">Parent</span>](#method_GetParent)
+- [**GetParent**() (<span style="color:#445588">Parent</span>, <span style="color:#445588">error</span>)](#method_GetParent)
 - [**SetData**(s <span style="color:#445588">string</span>) <span style="color:#445588">error</span>](#method_SetData)
 - [**SetDataFromBool**(b <span style="color:#445588">bool</span>) <span style="color:#445588">error</span>](#method_SetDataFromBool)
 - [**SetDataFromFloat**(f <span style="color:#445588">float64</span>) <span style="color:#445588">error</span>](#method_SetDataFromFloat)
@@ -234,17 +234,20 @@ func (n *Node) GetLabel() (string, error) {
 
 ---
 
-<a name="method_GetParent"></a><span style="font-size:1.25em">**GetParent**() [<span style="font-weight:400">Parent</span>](/XMLHandler/docs/ref/Node/Parent)
+<a name="method_GetParent"></a><span style="font-size:1.25em">**GetParent**() ([<span style="font-weight:400">Parent</span>](/XMLHandler/docs/ref/Node/Parent), <span style="color:#445588">error</span>)</span>
 
 ```go
-func (n *Node) GetParent() Parent {
+func (n *Node) GetParent() (Parent, error) {
 
-	return n.parent
+	if n.parent == nil {
+		return nil, fmt.Errorf("no parent")
+	}
+	return n.parent, nil
 
 }
 ```
 
-><span style="font-style:normal">Returns the node's `parent`. If there is no `parent`, returns `nil`.</span>
+><span style="font-style:normal">Returns the node's `parent`. Returns an error if the node has no parent.</span>
 
 ---
 
