@@ -1,8 +1,9 @@
 package Converter
 
 import (
-	"XMLHandler/Node"
 	"fmt"
+	"github.com/cucumber/godog/gherkin"
+	"github.com/freedee15/XMLHandler/Node"
 )
 
 func iCreateANodeTree() error {
@@ -104,10 +105,10 @@ func iConvertTheSelectedNodeToXML() error {
 
 }
 
-func theOutputShouldBe(arg1 string) error {
+func theOutputShouldBe(arg1 *gherkin.DocString) error {
 
-	if output != arg1 {
-		return fmt.Errorf("expected %s, got %s", arg1, output)
+	if output != arg1.Content {
+		return fmt.Errorf("expected:\n%s\ngot:\n%s", arg1.Content, output)
 	}
 
 	return nil
@@ -123,6 +124,29 @@ func iSetTheSelectedNodesDataTo(arg1 string) error {
 	if e := selected.SetData(arg1); e != nil {
 		return e
 	}
+
+	return nil
+
+}
+
+func iCreateANodeTreeLabelled(arg1 string) error {
+
+	nodeTree = &Node.Tree{Label: arg1}
+	return nil
+
+}
+
+func iConvertTheNodeTreeToXML() error {
+
+	if nodeTree == nil {
+		return fmt.Errorf("no node tree")
+	}
+
+	o, e := ConvertTreeToXML(nodeTree)
+	if e != nil {
+		return e
+	}
+	output = o
 
 	return nil
 

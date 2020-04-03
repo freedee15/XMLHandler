@@ -1,10 +1,10 @@
 package Converter
 
 import (
-	"XMLHandler/Node"
 	"flag"
 	"github.com/cucumber/godog"
 	"github.com/cucumber/godog/colors"
+	"github.com/freedee15/XMLHandler/Node"
 	"os"
 	"testing"
 )
@@ -44,14 +44,15 @@ func FeatureContext(s *godog.Suite) {
 
 	})
 
-	// individual
 	s.Step(`^I create a node tree$`, iCreateANodeTree)
 	s.Step(`^I create a child node of node tree labelled "([^"]*)"$`, iCreateAChildNodeOfNodeTreeLabelled)
 	s.Step(`^I create a child node of node "([^"]*)" labelled "([^"]*)"$`, iCreateAChildNodeOfNodeLabelled)
 	s.Step(`^I select child node "([^"]*)" of node tree$`, iSelectChildNodeOfNodeTree)
 	s.Step(`^I select child node "([^"]*)" of selected node$`, iSelectChildNodeOfSelectedNode)
 	s.Step(`^I convert the selected node to XML$`, iConvertTheSelectedNodeToXML)
-	s.Step(`^The output should be "([^"]*)"$`, theOutputShouldBe)
+	s.Step(`^the output should be:$`, theOutputShouldBe)
 	s.Step(`^I set the selected node\'s data to "([^"]*)"$`, iSetTheSelectedNodesDataTo)
+	s.Step(`^I create a node tree labelled "([^"]*)"$`, iCreateANodeTreeLabelled)
+	s.Step(`^I convert the node tree to XML$`, iConvertTheNodeTreeToXML)
 
 }
