@@ -1,13 +1,12 @@
-package Converter
+package XMLHandler
 
 import (
 	"fmt"
-	"github.com/freedee15/XMLHandler/Node"
 	"io/ioutil"
 	"strings"
 )
 
-func convertToXML_handleChildren(n *Node.Node, indent string) (string, error) {
+func convertToXML_handleChildren(n *Node, indent string) (string, error) {
 
 	if n == nil {
 		return "", fmt.Errorf("nil node")
@@ -60,27 +59,27 @@ func convertToXML_handleChildren(n *Node.Node, indent string) (string, error) {
 
 }
 
-func ConvertNodeToXML(n *Node.Node) (string, error) {
+func ConvertNodeToXML(n *Node) (string, error) {
 
 	if n == nil {
 		return "", fmt.Errorf("nil argument")
 	}
 
 	var i int
-	var parent Node.Parent = n
+	var parent Parent = n
 	for {
 
 		breakLoop := false
 		switch parent.(type) {
 
-		case *Node.Node:
-			p, e := parent.(*Node.Node).GetParent()
+		case *Node:
+			p, e := parent.(*Node).GetParent()
 			if e != nil {
 				return "", e
 			}
 			parent = p
 
-		case *Node.Tree:
+		case *Tree:
 			breakLoop = true
 
 		default:
@@ -148,7 +147,7 @@ func ConvertNodeToXML(n *Node.Node) (string, error) {
 
 }
 
-func ConvertTreeToXML(t *Node.Tree) (string, error) {
+func ConvertTreeToXML(t *Tree) (string, error) {
 
 	if t == nil {
 		return "", fmt.Errorf("nil tree")
@@ -171,7 +170,7 @@ func ConvertTreeToXML(t *Node.Tree) (string, error) {
 
 }
 
-func ExportTree(t *Node.Tree, path string) error {
+func ExportTree(t *Tree, path string) error {
 
 	if t == nil {
 		return fmt.Errorf("nil tree")

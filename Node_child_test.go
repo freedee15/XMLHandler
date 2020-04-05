@@ -1,28 +1,8 @@
-package Node
+package XMLHandler
 
 import (
 	"fmt"
 )
-
-func iCreateAChildNodeWithTheLabel(arg1 string) error {
-
-	if nodeTree == nil {
-		return fmt.Errorf("no node tree")
-	}
-
-	if shouldFail == true {
-		shouldFail = false
-		return fmt.Errorf("this step does not know how to fail")
-	}
-
-	childNode := &Node{}
-	if e := nodeTree.AddChild(childNode); e != nil {
-		return e
-	}
-	childNode.label = arg1
-	return nil
-
-}
 
 func iGiveChildNodeAValueOf(arg1, arg2 string) error {
 

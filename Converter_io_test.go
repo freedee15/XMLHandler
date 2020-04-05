@@ -1,9 +1,8 @@
-package Converter
+package XMLHandler
 
 import (
 	"fmt"
 	"github.com/cucumber/godog/gherkin"
-	"github.com/freedee15/XMLHandler/Node"
 	"io/ioutil"
 	"os"
 )
@@ -14,7 +13,7 @@ func iCreateAChildNodeOfSelectedNodeLabelled(arg1 string) error {
 		return fmt.Errorf("no selected node")
 	}
 
-	c := &Node.Node{}
+	c := &Node{}
 	if e := selected.AddChild(c); e != nil {
 		return e
 	}

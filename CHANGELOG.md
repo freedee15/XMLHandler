@@ -1,10 +1,10 @@
 # CHANGELOG
 
-
 ## [0.2.0]
 
 ### Added:
-- Added package Converter
+- Added functions `ConvertNodeToXML`, `ConvertTreeToXML`, `ExportTree`
+- Removed redundant package `Node` and moved its contents to base package `XMLHandler`
 
 ## [0.1.4] - 2020/04/03
 

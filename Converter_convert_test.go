@@ -1,18 +1,9 @@
-package Converter
+package XMLHandler
 
 import (
 	"fmt"
 	"github.com/cucumber/godog/gherkin"
-	"github.com/freedee15/XMLHandler/Node"
 )
-
-func iCreateANodeTree() error {
-
-	nodeTree = &Node.Tree{Label: "root"}
-
-	return nil
-
-}
 
 func iCreateAChildNodeOfNodeLabelled(arg1, arg2 string) error {
 
@@ -20,7 +11,7 @@ func iCreateAChildNodeOfNodeLabelled(arg1, arg2 string) error {
 		return fmt.Errorf("no node tree")
 	}
 
-	c := &Node.Node{}
+	c := &Node{}
 
 	n, e := nodeTree.GetChildFromLabel(arg1)
 	if e != nil {
