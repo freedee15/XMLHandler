@@ -3,8 +3,9 @@
 ## [0.2.0]
 
 ### Added:
-- Added functions `ConvertNodeToXML`, `ConvertTreeToXML`, `ExportTree`
+- Added functions `ConvertNodeToXML`, `ConvertTreeToXML`, `ExportTree`, `ImportFile`, `SortXML`
 - Removed redundant package `Node` and moved its contents to base package `XMLHandler`
+- Cleaned up `_test.go` files
 
 ## [0.1.4] - 2020/04/03
 

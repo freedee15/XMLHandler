@@ -180,10 +180,178 @@ func ExportTree(t *Tree, path string) error {
 	if e != nil {
 		return e
 	}
-	b := []byte(fmt.Sprintf("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n%s", o))
+	b := []byte(fmt.Sprintf("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n%s", o))
 	if e = ioutil.WriteFile(path, b, 0644); e != nil {
 		return e
 	}
 	return nil
+
+}
+
+func ImportFile(path string) (*Tree, error) {
+
+	b, e := ioutil.ReadFile(path)
+	if e != nil {
+		return nil, e
+	}
+
+	s := SortXML(string(b))
+
+	var current Parent
+	for i, c := range s {
+
+		var bracket bool
+		var end bool
+		if c[0:1] == "<" && c[len(c)-1:] == ">" {
+			bracket = true
+			c = c[1 : len(c)-1]
+			if c[0:1] == "/" {
+				end = true
+				c = c[1:]
+			} else if c[0:1] == "?" {
+				if i != 0 {
+					return nil, fmt.Errorf("invalid prolog")
+				}
+				if strings.Contains(c, "version=") {
+					if !strings.Contains(c, "version=\"1.0\"") {
+						return nil, fmt.Errorf("invalid xml version")
+					}
+				}
+				continue
+			}
+		}
+
+		var breakout bool
+		if bracket == true {
+			if end == true {
+				if current == nil {
+					return nil, fmt.Errorf("invalid xml")
+				}
+				switch current.(type) {
+
+				case *Node:
+					l, e := current.(*Node).GetLabel()
+					if e != nil {
+						return nil, e
+					}
+					if c != l {
+						return nil, fmt.Errorf("node closed without open")
+					}
+					a, e := current.(*Node).GetParent()
+					if e != nil {
+						return nil, e
+					}
+					current = a
+
+				case *Tree:
+					if c != current.(*Tree).Label {
+						return nil, fmt.Errorf("node closed without open")
+					}
+					breakout = true
+
+				}
+
+			} else {
+				if current == nil {
+					current = &Tree{Label: c}
+				} else {
+					n := &Node{}
+					if e := current.AddChild(n); e != nil {
+						return nil, e
+					}
+					if e := n.SetLabel(c); e != nil {
+						return nil, e
+					}
+					current = n
+				}
+			}
+		} else {
+			if current == nil {
+				return nil, fmt.Errorf("invalid xml")
+			}
+			switch current.(type) {
+
+			case *Tree:
+				return nil, fmt.Errorf("data in tree")
+
+			case *Node:
+				if e := current.(*Node).SetData(c); e != nil {
+					return nil, e
+				}
+
+			}
+		}
+
+		if breakout == true {
+			break
+		}
+
+	}
+
+	switch current.(type) {
+
+	case *Node:
+		return nil, fmt.Errorf("invalid xml")
+
+	case *Tree:
+		return current.(*Tree), nil
+
+	default:
+		return nil, fmt.Errorf("failed to return")
+
+	}
+
+}
+
+func SortXML(s string) []string {
+
+	var b = []byte(s)
+	b = []byte(strings.Replace(string(b), "\n", "", -1))
+	var bracket bool
+	var current string
+	var toReturn []string
+	for _, i := range b {
+
+		if bracket == false {
+
+			if i != '<' {
+				current += string(i)
+			} else {
+				if strings.Replace(current, " ", "", -1) != "" {
+					for current[0:1] == " " {
+						current = current[1:]
+					}
+					for current[len(current)-1:] == " " {
+						current = current[:len(current)-1]
+					}
+					toReturn = append(toReturn, current)
+				}
+				bracket = true
+				current = ""
+			}
+
+		} else {
+
+			if i != '>' {
+				current += string(i)
+			} else {
+				if strings.Replace(current, " ", "", -1) != "" {
+					for current[0:1] == " " {
+						current = current[1:]
+					}
+					for current[len(current)-1:] == " " {
+						current = current[:len(current)-1]
+					}
+					toReturn = append(toReturn, fmt.Sprintf("<%s>", current))
+				}
+				bracket = false
+				current = ""
+			}
+
+		}
+
+	}
+
+	return toReturn
 
 }

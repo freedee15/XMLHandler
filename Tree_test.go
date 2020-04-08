@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+//base
 func nodeShouldHaveTheParent(arg1, arg2 string) error {
 
 	if nodeTree == nil {
