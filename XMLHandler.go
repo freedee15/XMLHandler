@@ -82,9 +82,6 @@ func ConvertNodeToXML(n *Node) (string, error) {
 		case *Tree:
 			breakLoop = true
 
-		default:
-			return "", fmt.Errorf("this should be impossible")
-
 		}
 
 		if breakLoop == true {
